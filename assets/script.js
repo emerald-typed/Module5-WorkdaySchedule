@@ -13,14 +13,14 @@ $(()=> {
   $("button").click(function(){
     console.log($(this).closest("div").attr("id"));
     console.log($(this).closest("div").children("textarea").val());
+    localStorage.setItem($(this).closest("div").attr("id"), $(this).closest("div").children("textarea").val());
   });
 
   var currentDAY = dayjs().format('dddd, MMMM D YYYY');
   $('#currentDay').text(currentDAY);
 
-  //make get the hour from day js 
-  // var timeID = (dayjs().format('h'))
-  var timeID = 10;
+  //make get 24 hour from day js 
+  var timeID = (dayjs().format('h'))
   var AMPM = dayjs().format("A")
   if(AMPM == "PM"){
     timePull=timeID+12
@@ -38,7 +38,8 @@ $(()=> {
     //splitID to compare with time js not hours -
     var listEdit = list[i].id
     var listSlice = listEdit.slice(5);
-  
+
+    //if based on time for css
     if(timePull < Number(listSlice)){
       console.log(Number(listSlice), timeID ,"less")
       document.getElementById(listEdit).style.backgroundColor = "#d3d3d3";
@@ -56,10 +57,10 @@ $(()=> {
     }
   }
   
-  // TODO: Add code to get any user input that was saved in localStorage and set
-  // the values of the corresponding textarea elements. HINT: How can the id
-  // attribute of each time-block be used to do this?
-  //
-  // TODO: Add code to display the current date in the header of the page.
+  for (let i = 0; i < list.length; i++) {
+    console.log(document.getElementsByTagName("textarea")[i].textContent)
+    document.getElementsByTagName("textarea")[i].textContent = localStorage.getItem(list[i].id)
+    // console.log(localStorage.getItem(list[i].id))
+  }
 });
 
