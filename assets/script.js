@@ -3,9 +3,6 @@
 // in the html.
 
 // var saveBlock = document.getElementById("save").parentElement.nodeName
-function saveBlock(blockID){
-  console.log(blockID)
-}
 $(()=> {
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
@@ -15,13 +12,41 @@ $(()=> {
   // useful when saving the description in local storage?
   $("button").click(function(){
     console.log($(this).closest("div").attr("id"));
+    console.log($(this).closest("div").children("textarea").val());
   });
   // TODO: Add code to apply the past, present, or future class to each time
   // block by comparing the id to the current hour. HINTS: How can the id
   // attribute of each time-block be used to conditionally add or remove the
   // past, present, and future classes? How can Day.js be used to get the
   // current hour in 24-hour time?
-  //
+
+  var currentDAY = dayjs().format('dddd, MMMM D YYYY');
+  $('#currentDay').text(currentDAY);
+
+  //make get the hour form day js and make the format match id 
+  // var timeID = (dayjs().format('h'))
+  timeID = 10
+
+  var list =document.querySelectorAll("div.time-block[id]")
+  
+  for (let i = 0; i < list.length; i++) {
+    //splitID to compare with time js not hours -
+    var listEdit = list[i].id
+    var listSlice = listEdit.slice(5);
+    if(timeID < list[i]){
+      $(".time-block").css({"background-color": "#77dd77" , "color" : "white"})
+    }
+    else{
+      $(".time-block").css({"background-color": "#77dd77" , "color" : "red"})
+    }
+  }
+  
+
+  //Target class .time-block apply colors values
+
+  
+  
+
   // TODO: Add code to get any user input that was saved in localStorage and set
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
