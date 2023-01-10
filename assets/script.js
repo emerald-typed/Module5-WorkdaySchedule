@@ -12,9 +12,9 @@ $(()=> {
   //make get 24 hour from day js 
   var timeID = (dayjs().format('h'))
   var AMPM = dayjs().format("A")
+  console.log(AMPM)
   if(AMPM == "PM"){
-    timePull=timeID+12
-    console.log(timePull)
+    timePull=Number(timeID)+12;
   }
   else{
     timePull=timeID
@@ -46,7 +46,6 @@ $(()=> {
     }
   }
   for (let i = 0; i < list.length; i++) {
-    console.log(document.getElementsByTagName("textarea")[i].textContent)
     document.getElementsByTagName("textarea")[i].textContent = localStorage.getItem(list[i].id)
   }
 });
