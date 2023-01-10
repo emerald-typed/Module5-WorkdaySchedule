@@ -24,8 +24,8 @@ $(()=> {
   $('#currentDay').text(currentDAY);
 
   //make get the hour form day js and make the format match id 
-  // var timeID = (dayjs().format('h'))
-  timeID = 10
+   var timeID = (dayjs().format('h'))
+
 
   var list =document.querySelectorAll("div.time-block[id]")
   
@@ -33,11 +33,21 @@ $(()=> {
     //splitID to compare with time js not hours -
     var listEdit = list[i].id
     var listSlice = listEdit.slice(5);
-    if(timeID < list[i]){
-      $(".time-block").css({"background-color": "#77dd77" , "color" : "white"})
+  
+    if(timeID < Number(listSlice)){
+      console.log(Number(listSlice), timeID ,"less")
+      document.getElementById(listEdit).style.backgroundColor = "#d3d3d3";
+      document.getElementById(listEdit).style.color = "white";
     }
-    else{
-      $(".time-block").css({"background-color": "#77dd77" , "color" : "red"})
+    else if (timeID > Number(listSlice)){
+      console.log(Number(listSlice), timeID, "more")
+      document.getElementById(listEdit).style.backgroundColor = "#77dd77";
+      document.getElementById(listEdit).style.color = "white";
+    }
+    else if (timeID == Number(listSlice)){
+      console.log(Number(listSlice), timeID, "equal")
+      document.getElementById(listEdit).style.backgroundColor = "#ff6961";
+      document.getElementById(listEdit).style.color = "white";
     }
   }
   
